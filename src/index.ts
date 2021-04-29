@@ -26,3 +26,17 @@ skistiefel.kundenskonto = new Price(.02, undefined);
 skistiefel.kundenrabatt = new Price(.10, undefined);
 skistiefel.calcGewinn();
 skistiefel.print(true);
+
+
+
+let fabrik = new Kalkulation;
+fabrik.listeneinkaufspreis = 200 * 8;
+fabrik.bezugskosten = 12;
+fabrik.listenverkaufspreis = 3.40 * 800;
+fabrik.lieferrabatt = new Price(.15, undefined);
+fabrik.lieferskonto = new Price(.02, undefined);
+fabrik.kundenrabatt = new Price(.30, undefined);
+fabrik.kundenskonto = new Price(.03, undefined);
+fabrik.handlungskosten = new Price(.20, undefined);
+fabrik.calcGewinn();
+fabrik.print(true);

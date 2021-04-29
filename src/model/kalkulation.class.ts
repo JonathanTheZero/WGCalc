@@ -60,6 +60,7 @@ export class Kalkulation {
 
     toString(): string {
         let str = "";
+
         for (let key in this) {
             let val = this[key];
             if (val instanceof Price) {
@@ -72,8 +73,31 @@ export class Kalkulation {
     }
 
     print(table: boolean = false) {
+        let order: (keyof Kalkulation)[] = [
+            'listeneinkaufspreis',
+            'lieferrabatt',
+            'zieleinkaufspreis',
+            'lieferskonto',
+            'bareinkaufspreis',
+            'bezugskosten',
+            'bezugspreis',
+            'handlungskosten',
+            'selbstkostenpreis',
+            'gewinn',
+            'barverkaufspreis',
+            'kundenskonto',
+            'zielverkaufspreis',
+            'kundenrabatt',
+            'listenverkaufspreis',
+        ];
+        const ordered = new Kalkulation();
+        for (let o of order) {
+            //@ts-ignore
+            ordered[o] = this[o];
+        }
+        
         if (table)
-            console.table(this);
+            console.table(ordered);
         else
             console.log(this.toString());
     }

@@ -50,8 +50,29 @@ class Kalkulation {
         return str;
     }
     print(table = false) {
+        let order = [
+            'listeneinkaufspreis',
+            'lieferrabatt',
+            'zieleinkaufspreis',
+            'lieferskonto',
+            'bareinkaufspreis',
+            'bezugskosten',
+            'bezugspreis',
+            'handlungskosten',
+            'selbstkostenpreis',
+            'gewinn',
+            'barverkaufspreis',
+            'kundenskonto',
+            'zielverkaufspreis',
+            'kundenrabatt',
+            'listenverkaufspreis',
+        ];
+        const ordered = new Kalkulation();
+        for (let o of order) {
+            ordered[o] = this[o];
+        }
         if (table)
-            console.table(this);
+            console.table(ordered);
         else
             console.log(this.toString());
     }
