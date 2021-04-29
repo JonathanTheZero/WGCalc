@@ -24,12 +24,16 @@ export class Kalkulation {
             throw new Error("Bitte Listeneinkaufspreis angeben!");
         if (!this.lieferrabatt || !this.lieferrabatt.percentage)
             throw new Error("Bitte Lieferrabatt angeben!");
-        this.lieferrabatt.total = Number((this.listeneinkaufspreis * this.lieferrabatt.percentage).toFixed(2));
+        this.lieferrabatt.total = Number(
+            (this.listeneinkaufspreis * this.lieferrabatt.percentage).toFixed(2)
+        );
         this.zieleinkaufspreis = this.listeneinkaufspreis - this.lieferrabatt.total;
 
         if (!this.lieferskonto || !this.lieferskonto.percentage)
             throw new Error("Bitte Lieferskonto angeben!");
-        this.lieferskonto.total = Number((this.zieleinkaufspreis * this.lieferskonto.percentage).toFixed(2));
+        this.lieferskonto.total = Number(
+            (this.zieleinkaufspreis * this.lieferskonto.percentage).toFixed(2)
+        );
         this.bareinkaufspreis = this.zieleinkaufspreis - this.lieferskonto.total;
 
         if (!this.bezugskosten)
@@ -38,14 +42,18 @@ export class Kalkulation {
 
         if (!this.handlungskosten || !this.handlungskosten.percentage)
             throw new Error("Bitte Handlungskosten angeben!");
-        this.handlungskosten.total = Number((this.handlungskosten.percentage * this.bezugspreis).toFixed(2));
+        this.handlungskosten.total = Number(
+            (this.handlungskosten.percentage * this.bezugspreis).toFixed(2)
+        );
         this.selbstkostenpreis = this.bezugspreis + this.handlungskosten.total;
 
         if (!this.listenverkaufspreis)
             throw new Error("Bitte Listenverkaufspreis angeben!");
         if (!this.kundenrabatt || !this.kundenrabatt.percentage)
             throw new Error("Bitte Kundenrabatt angeben!");
-        this.kundenrabatt.total = Number((this.kundenrabatt.percentage * this.listenverkaufspreis).toFixed(2));
+        this.kundenrabatt.total = Number(
+            (this.kundenrabatt.percentage * this.listenverkaufspreis).toFixed(2)
+        );
         this.zielverkaufspreis = this.listenverkaufspreis - this.kundenrabatt.total;
 
         if (!this.kundenskonto || !this.kundenskonto.percentage)
@@ -53,9 +61,14 @@ export class Kalkulation {
         this.kundenskonto.total = Number((this.kundenskonto.percentage * this.zielverkaufspreis).toFixed(2));
         this.barverkaufspreis = this.zielverkaufspreis - this.kundenskonto.total;
 
+
         this.gewinn = new Price(undefined, undefined);
-        this.gewinn.total = Number((this.barverkaufspreis - this.selbstkostenpreis).toFixed(2));
-        this.gewinn.percentage = Number((this.gewinn.total / this.selbstkostenpreis).toFixed(2));
+        this.gewinn.total = Number(
+            (this.barverkaufspreis - this.selbstkostenpreis).toFixed(2)
+        );
+        this.gewinn.percentage = Number(
+            (this.gewinn.total / this.selbstkostenpreis).toFixed(4)
+        );
     }
 
     toString(): string {
@@ -90,15 +103,17 @@ export class Kalkulation {
             'kundenrabatt',
             'listenverkaufspreis',
         ];
+
         const ordered = new Kalkulation();
         for (let o of order) {
             //@ts-ignore
             ordered[o] = this[o];
         }
-        
-        if (table)
+
+        if (table) {
             console.table(ordered);
-        else
+        } else {
             console.log(this.toString());
+        }
     }
 }

@@ -34,7 +34,7 @@ class Kalkulation {
         this.barverkaufspreis = this.zielverkaufspreis - this.kundenskonto.total;
         this.gewinn = new price_class_1.Price(undefined, undefined);
         this.gewinn.total = Number((this.barverkaufspreis - this.selbstkostenpreis).toFixed(2));
-        this.gewinn.percentage = Number((this.gewinn.total / this.selbstkostenpreis).toFixed(2));
+        this.gewinn.percentage = Number((this.gewinn.total / this.selbstkostenpreis).toFixed(4));
     }
     toString() {
         let str = "";
@@ -71,10 +71,12 @@ class Kalkulation {
         for (let o of order) {
             ordered[o] = this[o];
         }
-        if (table)
+        if (table) {
             console.table(ordered);
-        else
+        }
+        else {
             console.log(this.toString());
+        }
     }
 }
 exports.Kalkulation = Kalkulation;
